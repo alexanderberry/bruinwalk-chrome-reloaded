@@ -27,17 +27,15 @@ function addBruinwalkButton(courseData, courseName) {
     }
 }
 
-function queryBruinwalk(bruinwalkButton, onComplete){
-    
-    // TODO: Finish Bruinwalk query script and handle promise or callback
-    
-    chrome.runtime.sendMessage(
-        {
-            method: 'GET',
-            action: 'xhttp',
-            url: 'http://bruinwalk.com/search?q=' + encodeURI(bruinwalkButton.getAttribute("prof-name")),
-            data: ''
-        },
+/* 
+    TODO: Figure out how to handle MyUCLA only displaying first name and last initial
+    (maybe best match algo)
+*/
 
-    )
+function queryBruinwalk(bruinwalkButton, onComplete){
+    var profNameURI = encodeURI(bruinwalkButton.getAttribute("prof-name"));
+    chrome.runtime.sendMessage({'prof_name': profNameURI}, function(response) {
+        onComplete(response)
+        //TODO: Handle response
+    });
 }
