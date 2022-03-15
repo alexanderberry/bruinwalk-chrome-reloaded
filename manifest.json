@@ -2,5 +2,15 @@
     "name": "Easy Bruinwalk Ratings Reloaded",
     "description": "Displays Bruinwalk ratings on MyUCLA class search results",
     "version": "1.0",
-    "manifest_version": 3
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "matches": ["https://*.my.ucla.edu/classplanner/*"],
+            "run_at": "document_end",
+            "js": ["myucla_content.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
 }
